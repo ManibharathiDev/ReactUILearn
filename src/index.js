@@ -1,56 +1,45 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { useState } from 'react';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { useState } from "react";
 
-let initialValue = 0;
-function Developers(props)
-{
+let count = 0;
+const FuncComp = () => {
 
-    const[count, setCount] = useState(0)
+    
+    const[myName, setMyName] = useState("Saravanan")
+    const[myCount,setMyCount] = useState(0);
 
-
-    const changeValue = () => {
-        setCount(initialValue++)
+    const changeMyCount = () => {
+        count++;
+        setMyCount(count)
     }
+    
 
-    function Welcome()
-    {
-        alert("Hi All");
-    }
-//ES6 Arrow function
-    const welcome = () => {
-        alert("Hi All-Arrow");
-    }
-
-    const getMyName = (myName) => {
-        alert(myName);
-    }
-
-    const getMyProp = () =>{
-        alert(props.mySkill)
-    }
-
-    const getMyQualification = () => {
-        alert(props.myQualification)
+    const changeMyName = (e) => {
+            console.log(e.target.value);
+            setMyName(e.target.value);
     }
 
     return(
-        <>
+        
             <div>
-                <h1>Welcome Developers</h1>
-                <h2>Qtree Technologies</h2>
-                <button onClick={Welcome}>Click Me</button>
-                <button onClick={welcome}>Click Arrow</button>
-                <button onClick={()=>getMyName("Mukesh")}>Get My Name</button>
-                <button onClick={getMyProp}>Get My Props</button>
-                <button onClick={getMyQualification}>Get My Qualification</button>
-                <h1>{count}</h1>
-                <button onClick={changeValue}>Increment</button>
+                <h1>Enter your name</h1>
+                {/* If you pass parameter, you can use below type */}
+                <input type="text" onChange={(e) => changeMyName(e)}/>
+                <br/>
+                <h2>
+                    {
+                        myName
+                    }
+                </h2>
+                <h1>{myCount}</h1>
+                {/* without parameter, you can use below type */}
+                <button onClick={changeMyCount}>Increment</button>
             </div>
-        </>
+    
     );
+
 }
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<Developers mySkill="React JS" myQualification="MCA"/>);
-
+root.render(<FuncComp/>)
