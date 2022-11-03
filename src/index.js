@@ -1,46 +1,70 @@
-import React from "react"
+import React from "react";
 import ReactDOM from "react-dom/client"
-import { useState } from "react"
-
-const ShowList = () =>{
-
-    const[rcount, setRowCount] = useState(0);
-    const changeRowCount = (e) =>
-    {
-        console.log(typeof(e.target.value))
-        
-        if(e.target.value !== "")
-            setRowCount(parseInt(e.target.value))
-        else
-            setRowCount(0)
-        
-    }
-
-    //const myItem = <h1>Hi Ranjith</h1>
-
-   
-
-    const myListItem = Array.from(Array(rcount),(e,i)=>{
-        // return(<li>{i}</li>)
-        return(
-            <tr><td>{i}</td><td>{5+5}</td></tr>
-        )
-    });
+import HeaderComps from "./component/headercomp";
 
 
+const myStyle = {
+    margin:0
+}
 
+const HeaderComp = (props) => {
+    console.log(props) 
     return(
-        <div>
-            <input type="text" onChange={(e) => changeRowCount(e)}/>
-           
-            <br/>
-            <h1>{rcount}</h1>
-            <table border="1">
-                {myListItem}
-            </table>
+        <div style={
+            {
+                backgroundColor:'#FF0000',
+                color:'#FFFFFF',
+                textAlign:'center',
+            }
+        }> 
+            <h1 style={myStyle}>{props.compName}</h1>
         </div>
     )
 }
 
-const root = ReactDOM.createRoot(document.getElementById('root'))
-root.render(<ShowList/>)
+const FooterComp = (props) => {
+    console.log(props);
+    return(
+        <div  style={
+            {
+                backgroundColor:'#FF0000',
+                color:'#FFFFFF',
+                textAlign:'center',
+            }
+        }>
+            
+            <h1 style={myStyle}>Footer Component</h1>
+        </div>
+    )
+}
+
+const BodyComp = () => {
+    return(
+        <div  style={
+            {
+                backgroundColor:'#FF00FF',
+                color:'#FFFFFF',
+                textAlign:'center',
+            }
+        }>
+            <h1 style={myStyle}>Body Component</h1>
+        </div>
+    )
+}
+
+const MainComp = () => {
+    return(
+        <div>
+            <HeaderComps newName="Qtree Tech"/>
+            <HeaderComps newName="Ranjith Tech"/>
+            <HeaderComps newName="Nano Tech"/>
+            <HeaderComp compName="Headers"/>
+                <BodyComp/>
+            <FooterComp/>
+        </div>
+    )
+}
+
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<MainComp/>)
