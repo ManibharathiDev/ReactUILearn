@@ -1,70 +1,44 @@
 import React from "react";
 import ReactDOM from "react-dom/client"
-import HeaderComps from "./component/headercomp";
+
+class MainComponent extends React.Component{
+
+    constructor(props)
+    {
+        super();
+        console.log(props.carName);
+        console.log(props.carMileage);
+        this.name = props.carName;
+        this.mileage = props.carMileage;
+    }
+
+    getMyName = () => {
+        alert("I am Mukesh");
+    }
+
+    getMyNameWithArg = (myName) => {
+        let myNames = myName;
+        alert(myNames);
+    }
+
+    // This refers to current object of the current class
 
 
-const myStyle = {
-    margin:0
+    render()
+    {
+        return(
+            <div>
+                <h1>Welcome Class based Component - {this.name}</h1>
+                <h1>My Mileage is - {this.mileage}</h1>
+                <h1 onClick={this.getMyName}>Get My Name</h1>
+                <h1 onClick={()=>this.getMyNameWithArg("Ranjith")}>Get My Value</h1>
+            </div>
+        );
+    }
 }
 
-const HeaderComp = (props) => {
-    console.log(props) 
-    return(
-        <div style={
-            {
-                backgroundColor:'#FF0000',
-                color:'#FFFFFF',
-                textAlign:'center',
-            }
-        }> 
-            <h1 style={myStyle}>{props.compName}</h1>
-        </div>
-    )
-}
-
-const FooterComp = (props) => {
-    console.log(props);
-    return(
-        <div  style={
-            {
-                backgroundColor:'#FF0000',
-                color:'#FFFFFF',
-                textAlign:'center',
-            }
-        }>
-            
-            <h1 style={myStyle}>Footer Component</h1>
-        </div>
-    )
-}
-
-const BodyComp = () => {
-    return(
-        <div  style={
-            {
-                backgroundColor:'#FF00FF',
-                color:'#FFFFFF',
-                textAlign:'center',
-            }
-        }>
-            <h1 style={myStyle}>Body Component</h1>
-        </div>
-    )
-}
-
-const MainComp = () => {
-    return(
-        <div>
-            <HeaderComps newName="Qtree Tech"/>
-            <HeaderComps newName="Ranjith Tech"/>
-            <HeaderComps newName="Nano Tech"/>
-            <HeaderComp compName="Headers"/>
-                <BodyComp/>
-            <FooterComp/>
-        </div>
-    )
-}
-
+//If you use functional Component, you must return jsx in retrun statement;
+// If you use class component, you must use render with return statement
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<MainComp/>)
+root.render(<MainComponent carName="Hyundai" carMileage="23phr"/>)

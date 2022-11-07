@@ -1,11 +1,12 @@
 import React from "react";
 import { useState } from "react";
 
-let myCount = 0;
-const HeaderComps = (props) => {
 
+const HeaderComps = (props) => {
+    let myCount = 0;
     const[count,setCount] = useState(0);
     const changeCount = () =>{
+        myCount = count;
         myCount++;
         setCount(myCount);
     }
