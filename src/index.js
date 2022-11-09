@@ -1,44 +1,47 @@
 import React from "react";
 import ReactDOM from "react-dom/client"
 
-class MainComponent extends React.Component{
+class College extends React.Component{
 
-    constructor(props)
-    {
-        super();
-        console.log(props.carName);
-        console.log(props.carMileage);
-        this.name = props.carName;
-        this.mileage = props.carMileage;
-    }
+        constructor(props){
+            super(props);
+            //const[myName,setMyName] = useState("Ran");
 
-    getMyName = () => {
-        alert("I am Mukesh");
-    }
+            this.state = {collegeName:"RVS College of Engineering",
+                        department:"MCA",
+                        affiliation:"Anna University",
+        };
 
-    getMyNameWithArg = (myName) => {
-        let myNames = myName;
-        alert(myNames);
-    }
+        }
 
-    // This refers to current object of the current class
+        changeState = () => {
+            this.setState(
+                {department:"MBA",
+                collegeName:"PSG Tech",
+            }
+            );
+        }
+        changeMyDepartment = (value) => {
+                this.setState({
+                    department:value
+                });
+        }
 
-
-    render()
-    {
-        return(
-            <div>
-                <h1>Welcome Class based Component - {this.name}</h1>
-                <h1>My Mileage is - {this.mileage}</h1>
-                <h1 onClick={this.getMyName}>Get My Name</h1>
-                <h1 onClick={()=>this.getMyNameWithArg("Ranjith")}>Get My Value</h1>
-            </div>
-        );
-    }
+        render()
+        {
+            return(
+                <div>
+                    <h1>Welcome Developers</h1>
+                    <h1>{this.state.collegeName}</h1>
+                    <h1>{this.state.department}</h1>
+                    <h1>{this.state.affiliation}</h1>
+                    <button onClick={this.changeState}>Change My Department to MBA</button>
+                    <br/>
+                    <input type="text" onChange={(e)=>this.changeMyDepartment(e.target.value)}/>
+                </div>
+            )
+        }
 }
 
-//If you use functional Component, you must return jsx in retrun statement;
-// If you use class component, you must use render with return statement
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<MainComponent carName="Hyundai" carMileage="23phr"/>)
+root.render(<College/>);
