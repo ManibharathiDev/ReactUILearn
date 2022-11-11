@@ -1,47 +1,29 @@
 import React from "react";
-import ReactDOM from "react-dom/client"
+import ReactDOM from "react-dom/client";
+import HeaderComps from "./component/headercomp";
+//Default Export
+//Named Export
 
-class College extends React.Component{
+const ListComponent = (props) => {
 
-        constructor(props){
-            super(props);
-            //const[myName,setMyName] = useState("Ran");
+    //const myNumbers = [5,4,3,2,1];
+    const myNumbers = props.myId
+    const listItems = myNumbers.map((num) =>
+       <tr key={num.toString()}><td>{num}</td><td>{num*2}</td><td>25</td></tr>
+    );
 
-            this.state = {collegeName:"RVS College of Engineering",
-                        department:"MCA",
-                        affiliation:"Anna University",
-        };
-
-        }
-
-        changeState = () => {
-            this.setState(
-                {department:"MBA",
-                collegeName:"PSG Tech",
-            }
-            );
-        }
-        changeMyDepartment = (value) => {
-                this.setState({
-                    department:value
-                });
-        }
-
-        render()
-        {
-            return(
-                <div>
-                    <h1>Welcome Developers</h1>
-                    <h1>{this.state.collegeName}</h1>
-                    <h1>{this.state.department}</h1>
-                    <h1>{this.state.affiliation}</h1>
-                    <button onClick={this.changeState}>Change My Department to MBA</button>
-                    <br/>
-                    <input type="text" onChange={(e)=>this.changeMyDepartment(e.target.value)}/>
-                </div>
-            )
-        }
+    return(
+        <div>
+            Welcome Developers
+            <table border="1">
+                <tr><td>ID</td><td>Name</td><td>Age</td></tr>
+                {listItems}
+            </table>
+        </div>
+    );
 }
 
+const myNumbers = [5,4,3,2,1];
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<College/>);
+root.render(<ListComponent myId={myNumbers}/>);
+//root.render(<HeaderComps newName="Ranjith" myId={myNumbers}/>)
