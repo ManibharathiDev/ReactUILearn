@@ -1,29 +1,57 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import HeaderComps from "./component/headercomp";
-//Default Export
-//Named Export
+class ArrayObjComponent extends React.Component{
+    constructor(props)
+    {
+        super(props);
+        this.state = {
+            employee:[
+                {
+                    id:1,
+                    firstName:"Ranjith",
+                    lastName:"Mohan",
+                    age:25,
+                },
+                {
+                    id:2,
+                    firstName:"Sanjeev",
+                    lastName:"Rajan",
+                    age:26,
+                },
+                {
+                    id:3,
+                    firstName:"Saravanan",
+                    lastName:"Kumar",
+                    age:28,
+                }
 
-const ListComponent = (props) => {
+            ]
+        };
+    }
 
-    //const myNumbers = [5,4,3,2,1];
-    const myNumbers = props.myId
-    const listItems = myNumbers.map((num) =>
-       <tr key={num.toString()}><td>{num}</td><td>{num*2}</td><td>25</td></tr>
-    );
-
-    return(
-        <div>
-            Welcome Developers
-            <table border="1">
-                <tr><td>ID</td><td>Name</td><td>Age</td></tr>
-                {listItems}
-            </table>
-        </div>
-    );
+    render()
+    {
+        const {employee} = this.state;
+        return(
+                <div>
+                    <table border="1" width="100%">
+                        <thead>
+                            <tr><th>First Name</th><th>Last Name</th><th>Age</th></tr>
+                            {
+                                employee.map(emp =>(
+                                    <tr key={emp.id}>
+                                        <td>{emp.firstName}</td>
+                                        <td>{emp.lastName}</td>
+                                        <td>{emp.age}</td>
+                                    </tr>
+                                ))
+                            }
+                        </thead>
+                    </table>
+                </div>
+        )
+    }
 }
 
-const myNumbers = [5,4,3,2,1];
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<ListComponent myId={myNumbers}/>);
-//root.render(<HeaderComps newName="Ranjith" myId={myNumbers}/>)
+root.render(<ArrayObjComponent/>)
