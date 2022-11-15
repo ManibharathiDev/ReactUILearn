@@ -1,57 +1,77 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-class ArrayObjComponent extends React.Component{
-    constructor(props)
-    {
-        super(props);
-        this.state = {
-            employee:[
-                {
-                    id:1,
-                    firstName:"Ranjith",
-                    lastName:"Mohan",
-                    age:25,
-                },
-                {
-                    id:2,
-                    firstName:"Sanjeev",
-                    lastName:"Rajan",
-                    age:26,
-                },
-                {
-                    id:3,
-                    firstName:"Saravanan",
-                    lastName:"Kumar",
-                    age:28,
-                }
+import LoginComponent from "./component/pages/LoginComponent";
+import LogoutComponent from "./component/pages/LogoutComponent";
 
-            ]
-        };
-    }
+const MyComponent = (props) =>{
 
-    render()
-    {
-        const {employee} = this.state;
+        const isLogins = props.isLogin;
+        const mySkills = props.skills
+
+        /* Ternary Operator */
         return(
-                <div>
-                    <table border="1" width="100%">
-                        <thead>
-                            <tr><th>First Name</th><th>Last Name</th><th>Age</th></tr>
-                            {
-                                employee.map(emp =>(
-                                    <tr key={emp.id}>
-                                        <td>{emp.firstName}</td>
-                                        <td>{emp.lastName}</td>
-                                        <td>{emp.age}</td>
-                                    </tr>
-                                ))
-                            }
-                        </thead>
-                    </table>
-                </div>
+            <>
+                {
+                    (isLogins==="true")?<LoginComponent/>:<LogoutComponent/>
+                }
+            </>
         )
-    }
+
+        /* Logical && Operator */
+        /*return(
+            <>
+                {
+                    mySkills.length > 0 &&
+                    <h2>I have {mySkills.length} Skills in Information Technology</h2>
+                }
+                {
+                    isLogins === "true" &&
+                    <h2>Wow!, You are logged in</h2>
+                }
+                <div>
+                    <h1>
+                        Welcome Developers
+                    </h1>
+                </div>
+            </>
+        )*/
+        
+
+        /* If Conditional */
+        /*if(isLogins === "true")
+        {
+            return(
+                <LoginComponent/>
+            )
+        }
+        else
+        {
+            return(
+                <LogoutComponent/>
+            )
+        }*/
+
+        /*const myNumber = props.number
+        if(myNumber%2 === 0)
+        {
+            return(
+                <div>
+                    <h1>This is Even Number</h1>
+                </div>
+            );
+        }
+        else
+        {
+            return(
+                <div>
+                    <h1>This is Odd Number</h1>
+                </div>
+            )
+        }*/
+
+
 }
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<ArrayObjComponent/>)
+const mySkills = ['JS',"HTML","ReactJS"]
+root.render(<MyComponent isLogin="false" skills={mySkills}/>)
