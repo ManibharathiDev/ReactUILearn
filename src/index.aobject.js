@@ -14,6 +14,7 @@ class ArrayObjComponent extends React.Component
                 }
             }
         }
+        
         render()
         {
             const {employee} = this.state
