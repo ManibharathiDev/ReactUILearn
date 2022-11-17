@@ -1,39 +1,17 @@
-import React, { isValidElement } from "react";
-import ReactDOM from "react-dom/client"
-class MyForms extends React.Component{
+import React from "react";
+import ReactDOM from "react-dom/client";
 
+class UnControlledComp extends React.Component{
     constructor(props)
     {
         super(props);
-        this.state = {myName:'',myAge:''};
-        console.log(this);
-        this.handleInputChange = this.handleInputChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-
-    }
-
-    handleInputChange(event)
-    {
-
-        //event.target.value
-        const myEvent = event
-        const myTarget = myEvent.target
-        const myValue = myTarget.value
-        const myNameInput = myTarget.name
-
-        
-        
-        console.log(myNameInput);
-        this.setState(
-            {
-                [myNameInput] : myValue
-            }
-        )
-        //this.setState({myName:event.target.value});
+        this.defaultMyName = "Ram";
+        this.inputName = React.createRef();
+        this.inputAge = React.createRef();
     }
 
     handleSubmit(event){
-            alert("Your Form "+this.state.myName+" &"+this.state.myAge+"  Submitted");
+            alert("You have submitted "+this.inputName.current.value+" & "+this.inputAge.current.value)
             event.preventDefault();
     }
 
@@ -41,26 +19,23 @@ class MyForms extends React.Component{
     render()
     {
         return(
-            <>
-                {/* <form onSubmit={this.handleSubmit.bind(this)}> */}
-                <form onSubmit={this.handleSubmit}>
+            <div>
+                <form onSubmit={this.handleSubmit.bind(this)}>
                     <label>
-                        Enter Your User Name:
-                        <input type="text" name="myName" value={this.state.myName} onChange={this.handleInputChange}/>
-                        
-                        {/* <input type="text" value={this.state.myName} onChange={this.handleInputChange.bind(this)}/> */}
-                        
+                        Enter the your name:
+                        <input type="text" defaultValue={this.defaultMyName} ref={this.inputName}/>
                     </label>
                     <label>
-                        Enter your Age:
-                        <input type="text" name="myAge" value={this.state.myAge} onChange={this.handleInputChange}/>
+                        Enter the your age:
+                        <input type="text" ref={this.inputAge}/>
                     </label>
                     <input type="submit" value="Submit"/>
                 </form>
-            </>
+            </div>
         )
     }
+
 }
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<MyForms/>)
+root.render(<UnControlledComp/>)
