@@ -1,5 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import logo from './google.png';
+
 
 class UnControlledComp extends React.Component{
     constructor(props)
@@ -20,6 +22,7 @@ class UnControlledComp extends React.Component{
     {
         return(
             <div>
+                <img src={logo} alt="test"/>
                 <form onSubmit={this.handleSubmit.bind(this)}>
                     <label>
                         Enter the your name:
