@@ -1,44 +1,48 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import logo from './google.png';
+import {BrowserRouter as Router,
+    Routes,
+    Route,Link } from "react-router-dom";
 
+function Home() {
+    return <h2>Home</h2>;
+  }
+  
+  function About() {
+    return <h2>About</h2>;
+  }
+  
+  function Users() {
+    return <h2>Users</h2>;
+  }
 
-class UnControlledComp extends React.Component{
-    constructor(props)
-    {
-        super(props);
-        this.defaultMyName = "Ram";
-        this.inputName = React.createRef();
-        this.inputAge = React.createRef();
-    }
+const MainComponent = () => {
+    return(
+        <Router>
+        <div>
+        <nav>
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/about">About</Link>
+            </li>
+            <li>
+              <Link to="/users">Users</Link>
+            </li>
+          </ul>
+        </nav>
 
-    handleSubmit(event){
-            alert("You have submitted "+this.inputName.current.value+" & "+this.inputAge.current.value)
-            event.preventDefault();
-    }
+        <Routes>
+          <Route path="/about" element={<About/>}/>
+          <Route path="/users" element={<Users/>}/>
+          <Route path="/" element={<Home/>}/>
+        </Routes>
 
-
-    render()
-    {
-        return(
-            <div>
-                <img src={logo} alt="test"/>
-                <form onSubmit={this.handleSubmit.bind(this)}>
-                    <label>
-                        Enter the your name:
-                        <input type="text" defaultValue={this.defaultMyName} ref={this.inputName}/>
-                    </label>
-                    <label>
-                        Enter the your age:
-                        <input type="text" ref={this.inputAge}/>
-                    </label>
-                    <input type="submit" value="Submit"/>
-                </form>
-            </div>
-        )
-    }
-
+        </div>
+        </Router>
+    )
 }
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<UnControlledComp/>)
+root.render(<MainComponent/>)
